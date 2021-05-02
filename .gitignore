@@ -1,0 +1,12 @@
+.DS_Store
+
+*.json
+config
+recipients_list
+zoom_info
+
+not_working/
+local_automate_emails.egg-info/
+
+__pycache__/
+*.pyc
