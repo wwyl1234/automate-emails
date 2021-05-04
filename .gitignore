@@ -10,3 +10,5 @@ local_automate_emails.egg-info/
 
 __pycache__/
 *.pyc
+
+env/
