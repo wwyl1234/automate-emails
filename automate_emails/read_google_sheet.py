@@ -15,7 +15,9 @@ MONTH_MAP = {"january" : 1, "february" : 2, "march" : 3, "april" : 4, "may" : 5,
 "july" : 7, "august" : 8, "september" : 9, "october" : 10, "november" : 11, "december" : 12}
 
 def load_google_sheet_data(sheet_id, token_json):
-    """Returns the data in the google sheet (list of dict objects) and columns names (list)."""
+    """
+    Returns the data in the google sheet (list of dict objects) and columns names (list).
+    """
 
     # define the scope
     scope = ["https://spreadsheets.google.com/feeds","https://www.googleapis.com/auth/drive"]
@@ -46,7 +48,8 @@ def load_google_sheet_data(sheet_id, token_json):
 
 
 def next_meeting(data, column_names, initial_date):
-    """Returns the row of data in a dict form for the next meeting when given the data
+    """
+    Returns the row of data in a dict form for the next meeting when given the data
     from the google sheet, column names and the initial date.
 
     The google sheet has its first column of dates.

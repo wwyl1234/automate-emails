@@ -16,7 +16,9 @@ from automate_emails import read_google_sheet
 
 
 def get_zoom_info(filename):
-    "Get zoom info from file with filename."
+    """
+    Get zoom info from file with filename.
+    """
 
     zoom_info = ""
     with open(filename, 'r') as infile:
@@ -26,7 +28,9 @@ def get_zoom_info(filename):
 
 
 def get_recipients(filename):
-    "Get recipients from file with filename where recipients are separated by a new line."
+    """
+    Get recipients from file with filename where recipients are separated by a new line.
+    """
 
     recipients = []
     with open(filename, 'r') as infile:
@@ -37,7 +41,8 @@ def get_recipients(filename):
 
 
 def send_mail(recipients, zoom_info, sheet_id, token_json):
-    """Sends the email via gmail with the given recipients, zoom info, sheet_id, token_json.
+    """
+    Sends the email via gmail with the given recipients, zoom info, sheet_id, token_json.
     """
 
     server = smtplib.SMTP("smtp.gmail.com", 587)
@@ -83,7 +88,9 @@ def send_mail(recipients, zoom_info, sheet_id, token_json):
 
 
 def main():
-    """The main function."""
+    """
+    The main function.
+    """
 
     print("Loading files and environment variables...")
 
