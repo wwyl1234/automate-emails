@@ -55,6 +55,9 @@ def next_meeting(data, column_names, initial_date):
     The google sheet has its first column of dates.
     """
 
+    if not data or data == [{}] or not column_names or not initial_date:
+        return {}
+
     date_col_name = column_names[0]
 
     for row in data:

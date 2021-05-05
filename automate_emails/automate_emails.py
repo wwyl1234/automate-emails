@@ -99,8 +99,8 @@ def main():
     loaded_zoom_info = get_zoom_info("zoom_info")
 
     config_file_content = ""
-    with open("config") as f:
-        config_file_content = f.read()
+    with open("config") as infile:
+        config_file_content = infile.read()
 
     config_parser = configparser.RawConfigParser()
     config_parser.read_string(config_file_content)
