@@ -7,7 +7,7 @@ import getpass
 import configparser
 from email.mime.text import MIMEText
 from datetime import date
-from automate_emails import read_google_sheet
+from automate_emails import google_sheet
 
 
 # Reference:
@@ -53,17 +53,17 @@ def send_mail(recipients, zoom_info, sheet_id, token_json):
     server.starttls()
     server.login(user, password)
 
-    data, column_names = read_google_sheet.load_google_sheet_data(
-        sheet_id,
-        token_json
-        )
+    sheet = google_sheet.GoogleSheet()
+    sheet.load(sheet_id, token_json)
+    # This google sheet has only 1 worksheet
+    worksheet = sheet.worksheets[0]
     today = date.today()
-    next_meeting = read_google_sheet.next_meeting(data, column_names, today)
+    next_meeting = worksheet.next_meeting(today)
 
     # need to get the next date of meeting
-    meeting_date = next_meeting[column_names[0]]
-    passage = next_meeting[column_names[1]]
-    leader = next_meeting[column_names[2]]
+    meeting_date = next_meeting[worksheet.column_names[0]]
+    passage = next_meeting[worksheet.column_names[1]]
+    leader = next_meeting[worksheet.column_names[2]]
 
     body = """
     Hello, everyone!
