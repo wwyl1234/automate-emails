@@ -2,7 +2,7 @@
 A module to contain the Worksheet class.
 
 Assumes the data in the worksheet has its column names in the first row.
-The first column is called Date and has information about dates.
+One of these column names is called 'Date' and contain information about dates.
 """
 
 from datetime import date
@@ -13,7 +13,7 @@ MONTH_MAP = {"january" : 1, "february" : 2, "march" : 3, "april" : 4, "may" : 5,
 class Worksheet():
     """
     The class that represents a worksheet in Google sheet where the first row has the column names.
-    The first column is called Date and has information about dates and is ordered by date.
+    One of these column names is called 'Date' and contain information about dates.
     """
 
     def __init__(self, data=None, worksheet_index=None):
@@ -42,11 +42,15 @@ class Worksheet():
         initial_date : datetime.date object represents the date of the initial_date
         """
 
-        if not self.data or self.data == [{}] or not self.column_names or not initial_date:
+        date_column_index = self.get_date_column_index()
+        if not self.data or self.data == [{}] or not self.column_names or  \
+            not initial_date or date_column_index is None:
             return {}
 
         # Assumes the first column is Date
-        date_col_name = self.column_names[0]
+        date_col_name = self.column_names[date_column_index]
+        next_date = None
+        next_row = None
 
         for row in self.data:
             date_in_row = row[date_col_name]
@@ -59,7 +63,28 @@ class Worksheet():
 
             # compare with initial date and this date
             if initial_date < cur_date :
-                return row
+                if next_date:
+                    if next_date > cur_date:
+                        next_date = cur_date
+                        next_row = row
+                else:
+                    # next_date is still None and has not been updated
+                    next_date = cur_date
+                    next_row = row
+
+        if next_date and next_row:
+            return next_row
 
         # Means you need to update spreadsheet
         return {}
+
+    def get_date_column_index(self):
+        """
+        Returns the index of the column where column is called 'Date'.
+        """
+
+        for index, column_name in enumerate(self.column_names):
+            filtered_column_name = column_name.strip() # Remove spaces
+            if filtered_column_name == "Date":
+                return index
+        return -1
