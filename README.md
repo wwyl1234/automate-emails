@@ -1,5 +1,5 @@
 # automate-emails
-A collection of code that automates emails every 2nd Sunday on my machine, that reads a very specfic Google sheet and generates an email based on the next Zoom meeting that should take place.
+A collection of code that automates emails every 2nd Sunday on my machine, that reads a very specfic Google sheet and generates an email based on the email template.
 
 
 ## Pre Setup that is needed
@@ -29,15 +29,48 @@ sheet_id = <google_sheet_id>
 token_json = <filename_of_credentials_of_service_account_as_json_file>
 ```
 
-3) the list of recipients separated by a newline characters called "recipients_list" 
-4) the Zoom information called "zoom_info"
-5) You need to setup the virtual environment in the same directory as cli.py
+3) The email template. Currently, the program looks for 'ECG_email_template'. The email template takes on the form as
+```
+SENDER
+<sender_email>
+RECIPIENTS
+<recipient1_email>
+<recipient2_email>
+.
+.
+.
+<recipientN_email>
+SUBJECT
+<subject>
+BODY
+<body>
+```
+can add substitution in the template by adding curly brackets over keywords like '{date}'.
+
+
+Here is an example of a email template file.
+```
+SENDER
+test1@test.com
+RECIPIENTS
+test2@test.com
+test3@test.com
+SUBJECT
+This is test email number {email_num}.
+BODY
+Hello testers,
+How are you doing? 
+Please give me your results by {date}.
+Cheers,
+test1
+```
+
+
+4) You need to setup the virtual environment in the same directory as cli.py
 
 
 ### TODOs
-* Investigate the docs for using google sheet api from google (right now using gspread module instead of following their docs)
-* Can abstract this further and decouple automate_emails.py
-* Add unit tests
+* Investigate the docs for using google sheet api from google (right now using gspread module instead of following their docs
 * Can explore sending emails on different email service providers like Outlook and so forth
 * add an option to store username and password in a config file for sending emails
 

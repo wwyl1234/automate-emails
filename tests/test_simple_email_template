@@ -1,0 +1,8 @@
+SENDER
+test1@test.com
+RECIPIENTS
+test2@test.com
+SUBJECT
+Test simple test case
+BODY
+Hello, it is me!

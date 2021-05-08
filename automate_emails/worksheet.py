@@ -22,8 +22,9 @@ class Worksheet():
 
         data : list of dict objects where each dict represents a row with the keys as the
             column names and values as the entry
-        worksheet_index  : int represents the worksheet index where 0 is the first worksheet
+        worksheet_index : int represents the worksheet index where 0 is the first worksheet
         """
+
         if not data or worksheet_index is None:
             # Invalid worksheet or empty
             self.data = []

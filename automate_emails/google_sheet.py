@@ -9,13 +9,16 @@ from automate_emails import worksheet
 # reference:
 # https://www.analyticsvidhya.com/blog/2020/07/read-and-update-google-spreadsheets-with-python/
 
-
 class GoogleSheet():
     """
     The GoogleSheet class that represents a Google sheet.
     """
 
     def __init__(self):
+        """
+        The constructor.
+        """
+
         self.sheet_id = ""
         self.worksheets = []
 

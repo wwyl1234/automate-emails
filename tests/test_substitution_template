@@ -1,0 +1,11 @@
+SENDER
+test1@test.com
+RECIPIENTS
+test2@test.com
+SUBJECT
+Test substitution {num1} {num2} {num3} test case
+BODY
+Dear test2,
+Hello, it is me! Lets meet on {date} at {time} at {secret_location}.
+Cheers,
+test1
