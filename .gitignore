@@ -1,16 +1,19 @@
-.DS_Store
-
-*.json
-config
+# Old files
+not_working/
 recipients_list
 zoom_info
 
-not_working/
 local_automate_emails.egg-info/
 
+.DS_Store
 __pycache__/
 *.pyc
 
 env/
 
+config
+*.json
 ECG_email_template
+
+.coverage
+htmlcov/

@@ -4,7 +4,7 @@ This module contains functions that retrivie data from files and send emails.
 
 import smtplib
 import getpass
-import configparser
+
 from datetime import date
 from automate_emails import google_sheet
 from automate_emails import email
@@ -39,7 +39,7 @@ def send_mail(email_template_filename, keywords):
     server.quit()
 
 
-def main():
+def main(email_template_filepath, sheet_id, token_json, worksheet_index):
     """
     The main function.
     """
@@ -47,19 +47,10 @@ def main():
     print("Loading files and environment variables...")
 
     today = date.today()
-    config_file_content = ""
-    with open("config") as infile:
-        config_file_content = infile.read()
-
-    config_parser = configparser.RawConfigParser()
-    config_parser.read_string(config_file_content)
-    sheet_id = config_parser.get("Env Variables", "sheet_id")
-    token_json = config_parser.get("Env Variables", "token_json")
-
     sheet = google_sheet.GoogleSheet()
     sheet.load(sheet_id, token_json)
-    # This google sheet has only 1 worksheet
-    worksheet = sheet.worksheets[0]
+
+    worksheet = sheet.worksheets[worksheet_index]
     today = date.today()
     next_meeting = worksheet.next_meeting(today)
     keywords = {
@@ -74,9 +65,6 @@ def main():
     if today.weekday() == 6 and  8 <= today.day <= 14 :
         print("Attemping to send email...")
         send_mail(
-            "ECG_email_template",
+            email_template_filepath,
             keywords
             )
-
-if __name__ == "__main__":
-    main()
